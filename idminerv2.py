@@ -23,16 +23,10 @@ import nltk.corpus
 import numpy as np
 import math
 from textblob import TextBlob as tb
-from PIL import Image
 from os import path
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 import random
-from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 import becas
 import json
-from gooey import Gooey, GooeyParser
 from collections import Counter
 from collections import defaultdict
 from nltk.tokenize import RegexpTokenizer
@@ -41,59 +35,10 @@ import string
 
 
 
-# running = True
-# nltk.download("stopwords", quiet=True)
-# nltk.download("punkt", quiet=True)
-# nltk.download("wordnet", quiet=True)
-
-@Gooey(advanced=True,
-    optional_cols=2,
-    program_name="Gene Cloud",
-    tabbed_groups=True,
-    dump_build_config=True,
-    show_success_modal=False,
-    default_size=(1024, 768))
-
-def window():
-    parser = GooeyParser(description="An enhancer for PaperBlast")
-    subs = parser.add_subparsers(help='commands', dest='command')
-    parser_one = subs.add_parser('Module 1', prog="PaperBlast")
-    parser_one.add_argument('genes',default="id1\nid2", widget='Textarea',help="Uniprot IDs of your genes of interest. Separate by new lines",
-                        metavar='Uniprot IDs',gooey_options={
-                            'height': 10000})
-    parser_one.add_argument("output",action="store",default="output.txt",widget='TextField',
-                        metavar='Output File',help="Name of the output file")
-    parser_two = subs.add_parser('Module 2', prog="Enhancer")
-    parser_two.add_argument('fasta',metavar='multifasta file',action='store',widget='FileChooser',help="multifasta file in fasta format")
-    parser_two.add_argument('pubmed',metavar='Pubmed IDs files',action='store',widget='FileChooser',help="Output file of Woody 1")
-    parser_two.add_argument('basename', default="basename", widget="TextField",help="basename of the output files.",metavar='Basename')
-    parser_two.add_argument('--terms', default="regex1\nregex2", widget="Textarea",help="Regex terms that the abstracts must have",
-                        metavar='Terms',gooey_options={
-                            'height': 10000})
-    listimg = os.listdir(os.path.join(os.path.dirname(__file__), './pics'))
-    parser_two.add_argument('--img',
-                        metavar="Wordcloud Image",
-                        help = "Choose one",
-                        nargs="+",
-                        default=['square'],
-                        choices=sorted(listimg),
-                        widget='Listbox',
-                        gooey_options={
-                            'height': 1000,
-                            'heading_color': 'blue',
-                            'text_color': 'red',
-                        }
-                        )
-    parser_two.add_argument('--stopwords', default="word1\nword2",widget='Textarea',help="Stopword to clean your results",
-                        metavar='Stopwords')
-    parser_two.add_argument('--pubtator', default="", widget="TextField",help="output file name,  if empty not run Pubtator",metavar='Pubtator results')
-    parser_two.add_argument('--project', default="", widget='TextField',help="Tagtog project name",metavar="Project name")
-    parser_two.add_argument('--username', default="", widget='TextField',help="Tagtog username",
-                        metavar='Username')
-    parser_two.add_argument('--password', default="", widget='PasswordField',help="Tagtog password",
-                        metavar='Password')
-    args = parser.parse_args()
-    return args
+running = True
+nltk.download("stopwords", quiet=True)
+nltk.download("punkt", quiet=True)
+nltk.download("wordnet", quiet=True)
 
 #PaperBlast
 
@@ -513,169 +458,6 @@ create_gene_artciles_dataframe(geneterms)
 elapsed_time = time.time() - start_time
 
 print(elapsed_time," <- Informacion de articulo por gen: 5 genes")
-
-
-# def getgram(n,abstractslist,idlist,wordsbyabstracts,stopgram):
-#     gramdict = defaultdict(list)
-#     lemmatizer = nltk.stem.WordNetLemmatizer()
-#     stopwords = nltk.corpus.stopwords.words('english') #stopwords
-#     abstracts = abstractslist
-#     for z in stopgram[0]:
-#         stopwords.append(z) # agrego a los stopwords las relevantes a los onegram
-#     if n == 1:
-#         cleaned_words = [[w for w in subabstract if (len(w) > 2 and not w[0].isdigit())] for subabstract in wordsbyabstracts]
-#         cleaned_words = [[w for w in subabstract if w not in stopwords] for subabstract in cleaned_words]
-#         cleaned_words = [[lemmatizer.lemmatize(l,pos="v") for l in subabstract] for subabstract in cleaned_words]
-#         cleaned_words = [[lemmatizer.lemmatize(l) if l[-1] == "s" else l for l in subabstract]for subabstract in cleaned_words]
-#         cleaned_words = [[stemmer.stem(l) if (l.endswith("ing") or l.endswith("lly") and zipf_frequency(l,"en") <= 4 ) else l for l in subabstract]for subabstract in cleaned_words]
-#         cleaned_words = [[w for w in subabstract if w not in stopwords and zipf_frequency(w, 'en') <= 5]for subabstract in cleaned_words]
-#         bag_of_words = list(itertools.chain.from_iterable(cleaned_words))
-#         freq = nltk.FreqDist(bag_of_words)
-#         freq_common = [x for x in freq.items() if x[1] >= 2]
-#         for x in freq_common:
-#             term = x[0]
-#             freq_value = x[1]
-#             in_abstract = [1 if re.search(r'\b' + term + r'\b', " ".join(y)) else 0 for y in cleaned_words]
-#             narticles = sum(in_abstract)
-#             id_abstracts = ",".join([v for i,v in enumerate(idlist) if  in_abstract[i] == 1])
-#             if narticles > 0:
-#                 gramdict[term] = [freq_value,narticles,id_abstracts] #numero de articulos en que aparece mencionado el grama
-#             else:
-#                 pass
-#     elif n == 2:
-#         bigrams = [[" ".join(map(str,b)) for b in nltk.bigrams(subabstract) if (b[0] not in stopwords and b[1] not in stopwords and " ".join(map(str,b)) not in stopgram[1])] for subabstract in wordsbyabstracts]
-#         bag_of_words = list(itertools.chain.from_iterable(bigrams))
-#         freq = nltk.FreqDist(bag_of_words)
-#         freq_common = [x for x in freq.items() if x[1] >= len(abstracts)*0.01]
-#         for x in freq_common:
-#             term = x[0]
-#             freq_value = x[1]
-#             in_abstract = [1 if re.search(r'\b' + term + r'\b', " - ".join(y)) else 0 for y in bigrams]
-#             narticles = sum(in_abstract)
-#             id_abstracts = ",".join([v for i,v in enumerate(idlist) if  in_abstract[i] == 1])
-#             if narticles > 0:
-#                 gramdict[term] = [freq_value,narticles,id_abstracts] #numero de articulos en que aparece mencionado el grama
-#             else:
-#                 pass
-#     elif n == 3:
-#         trigrams = [[" ".join(map(str,b)) for b in nltk.trigrams(subabstract) if (b[0] not in stopwords and b[1] not in stopwords and b[2] not in stopwords and " ".join(map(str,b)) not in stopgram[2])] for subabstract in wordsbyabstracts]
-#         bag_of_words = list(itertools.chain.from_iterable(trigrams))
-#         freq = nltk.FreqDist(bag_of_words)
-#         freq_common = [x for x in freq.items() if x[1] >= len(abstracts)*0.01]
-#         for x in freq_common:
-#             term = x[0]
-#             freq_value = x[1]
-#             in_abstract = [1 if re.search(r'\b' + term + r'\b', " - ".join(y)) else 0 for y in trigrams]
-#             narticles = sum(in_abstract)
-#             id_abstracts = ",".join([v for i,v in enumerate(idlist) if  in_abstract[i] == 1])
-#             if narticles > 0:
-#                 gramdict[term] = [freq_value,narticles,id_abstracts] #numero de articulos en que aparece mencionado el grama
-#             else:
-#                 pass
-#     return gramdict
-
-# def genes_info(genepmids,stopgram):
-#     """
-#     Function to obtain the one and bigrams associated with a specific gene. 
-#     input: pmids: list of pubmed id. gene: gene who is associated with the pmids.
-#     output: genedict: dictionary of genes and his associated one and bigrams.
-#     """
-#     full_abstracts = []
-#     full_pubmedid = []
-#     for gene,pmids in genepmids.items():
-#         abstarct,pubmedid = get_abstarcts(pmids,gene)
-#         full_abstracts += abstarct
-#         full_pubmedid += pubmedid
-#     wordsbyabstracts = get_words(full_abstracts)
-#     onegramdict = getgram(1,full_abstracts,full_pubmedid,wordsbyabstracts,stopgram)
-#     #twogramdict = getgram(2,full_abstracts,full_pubmedid,wordsbyabstracts,stopgram)
-#     #threegramdict = getgram(3,full_abstracts,full_pubmedid,wordsbyabstracts,stopgram)
-#     return onegramdict,full_abstracts,full_pubmedid
-
-# def term_counts(genepmids,gramdict,full_abstracts,stopgram,type):
-#     """
-#     term_counts define the number of genes and the number of articles that a gram is present. Also count the number of genes which has articles that have the term.
-#     input: gramdict: dictionary of terms and count of term (number of article where it appear) for a specific gene.
-#     output: dictionary of terms that indicate the total gene which the term has connection with it 
-#     """
-#     zipterm = ""
-#     termdict = defaultdict(list)
-#     gramlist = [x for x in gramdict.keys()]
-#     if type == 1:
-#         idfscore = idf_dict(gramdict,gramlist,full_abstracts,stopgram)
-#     for term in gramlist:
-#         termdict[term] = [0]*(len(genepmids.keys())+5)
-#         for index,gene in enumerate(genepmids):
-#             narticlesbygene = sum([1 if x in  genepmids[gene].split(",") else 0 for x in gramdict[term][2].split(",")])
-#             termdict[term][index+1] = narticlesbygene
-#         termdict[term][0] = len(termdict[term]) - termdict[term].count(0) #number of genes associated with the term
-#         termdict[term][-1] = gramdict[term][1] # number of articles that contain the term
-#         termdict[term][-2] = gramdict[term][0] # frequency of the term in the document
-#         zipterm = term.split(" ")
-#         flag = any(1 if len(x) >= 2 else 0 for x in zipterm)
-#         if flag:
-#             zipterm = [x for x in zipterm if len(x) >= 2 ]
-#         termdict[term][-3] = round(sum(zipf_frequency(t, 'en') for t in zipterm)/len(zipterm),3) #zipf score (general freq of the word)
-#         if type == 1:
-#             termdict[term][-4] = round(idfscore[term],3) #idf score
-#         else:
-#             termdict[term][-4] = 0 #idf score only computed for one grams.
-#     return termdict
-
-# def compute_score(termdict,genepmids):
-#     sorteddict = sorted(termdict.items(), key=lambda t: t[1][0],reverse=True)
-#     termscore = {}
-#     for k,v in sorteddict:
-#         plus = [1 if len(k) < 4 else 0]
-#         highfreq = [1 if (v[-2]/v[-1]) > 0 else 0]
-#         score = ((v[0]/len(genepmids))*10 - 2*max(v[1:-4])/v[-1] -1.5*(v[-3]) -(len(genepmids)/v[-2]) + plus[0] -v[-4] + highfreq[0]) + 20
-#         termscore[k] = round(score,3)
-#     return termscore
-
-# def abstractwordcloud(termscore,pic,name):
-#     print("Creating WordCloud!")
-#     maskpic = np.array(Image.open(pic))
-#     image_colors = ImageColorGenerator(maskpic)
-#     wc = WordCloud(width=900,height=500, max_words=len(termscore),relative_scaling=1,normalize_plurals=False, mask=maskpic,random_state=1,margin=5).generate_from_frequencies(termscore)
-#     wc.to_file(name + "_WordCloud.png")
-#     plt.imshow(wc,interpolation="bilinear")
-#     plt.axis("off")
-#     plt.figure()
-#     plt.close()
-#     return None
-
-# # Funciones Auxiliares
-
-# def freqterms(gramdict,nterminf,ntermsup):
-#     sortedict = sorted(gramdict.items(), key=lambda t: t[1][0],reverse=True)
-#     count = 0
-#     terms = []
-#     for k,v in sortedict:
-#         count +=1
-#         if count > nterminf and count < ntermsup:
-#             terms.append(k)
-#     return terms
-
-# # ##### MAIN FUNCTIONS #####
-
-# data_folder = Path("C:/Users/santi/")
-
-# file_to_open = data_folder / "Articles.tab"
-
-# df = pd.read_csv(file_to_open,sep="\t",header=0)
-
-# ############### 
-
-# stopgram = generate_stop_grams()
-# df.dropna(inplace=True)
-# genepmids = ids_by_gene(df)
-# onegramdict,full_abstracts,full_pubmedid = genes_info(genepmids,stopgram)
-# #termdict = term_counts(genepmids,onegramdict,full_abstracts,stopgram,1)
-# #termscore = compute_score(termdict,genepmids)
-# #twotermdict = term_counts(genepmids,twogramdict,full_abstracts,stopgram,2) 
-# #abstractwordcloud(termscore,"brain-990x622.png","guille")
-
-
 
 
 
