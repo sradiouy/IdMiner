@@ -1,14 +1,15 @@
-### IDMiner
 
-"Lo que hace el programa"
+# IDMiner: abstract text minnig approach to explore overrepresentated biological terms from gene lists
 
-##### 1. Clone or download this repo
+
+
+## 1. Clone or download this repo
 
 ```
 git clone https://github.com/sradiouy/IdMiner
 ```
 
-##### 2. Enter to the project directory
+## 2. Enter to the project directory
 
 ```
 cd IdMiner
@@ -48,20 +49,20 @@ vidminer/Scripts/activate.bat
 
 ```
 
-### 4. Install project requirements (in some case you need to install wheels).
+## 4. Install project requirements (in some case you need to install wheels).
 
 ```
 pip install wheel
 pip install -r requirements.txt
 ```
 
-### 5. Run the application.
+## 5. Run the application.
 
 ```
 python idminer.py
 ```
 
-### 6. Enter to localhost in any web browser:
+## 6. Enter to localhost in any web browser:
 
 ````
 http://127.0.0.1:8050/
