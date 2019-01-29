@@ -2,9 +2,9 @@
 
 "Lo que hace el programa"
 
-##### To run this app:
+##### To run IDMiner:
 
-You can clone or download this repo:   
+You can __clone__ or __download__ this repo:   
 ```
 git clone https://github.com/sradiouy/IdMiner
 ```
