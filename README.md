@@ -15,12 +15,10 @@ cd IdMiner
 ```
 ## To install dependencies using venv
 
-Create a virtual environment called virtual_env unsing python 3 venv tool.
-
-Now create and activate a virtualenv:   
+1. Now create and activate a virtualenv:   
 
 
-### On a mac or linux:
+### 1.1 On Mac or Linux:
 
 ```
 apt-get install python3-venv   --- (only if needed)
@@ -30,7 +28,7 @@ python3 -m venv vidminer
 source vidminer/bin/activate
 ````
 
-### On a Windows: 
+### 1.2 On Windows: 
  
  If it is your first time with python app, we recommend the following things: 
   
@@ -53,7 +51,7 @@ vidminer/Scripts/activate
 
 Now that virtualenv is setup and active we can install the dependencies and wheels: 
 
-Install project requirements (in some case you need to install wheels).
+### 2. Install project requirements (in some case you need to install wheels).
 
 ```
 pip install wheel
