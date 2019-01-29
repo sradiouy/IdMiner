@@ -218,7 +218,6 @@ def check_format(input_file,format_file):
             raise ValueError("There was an error with your fasta file. Please check if it is a valid format")
     else:
         genes = get_genes_ids_from_text(input_file)
-        print(genes,"_-----")
         if not genes:
             logging.error("There was an error with your txt file. Please check if it is a valid format. Remember genes id must be separeted by new lines")
             raise ValueError("There was an error with your txt file. Please check if it is a valid format. Remember genes id must be separeted by new lines")
@@ -238,10 +237,8 @@ def ids_by_gene(input_file,format_file,pcov=30,pident=30):
     Raises:
         ValueError -- Rise an error if there was not results.
     """
-    print("--------")
     articles = []
     genes = check_format(input_file,format_file) #Check format and return genes name (and if fasta sequence)
-    print(genes)
     for gene in genes:
         if format_file == "fasta":
             xml_list = get_text_from_fasta(gene,genes[gene]) # get blastpaper result
