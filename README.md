@@ -11,7 +11,7 @@ git clone https://github.com/sradiouy/IdMiner
 
 Then cd into the repo:   
 ```
-cd datascience-IdMiner
+cd IdMiner
 ```
 ## To install dependencies using venv
 
