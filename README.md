@@ -32,7 +32,7 @@ source vidminer/bin/activate
 
 ### On a Windows: 
  
- If it is your first time with python app, we reccommend the following things: 
+ If it is your first time with python app, we recommend the following things: 
   
   1. installation of visual studio code (https://code.visualstudio.com/docs/python/python-tutorial)
   2. Go to https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2017 and download "Build Tools For Visual Studio" under "Tools for " Visual Studio"
