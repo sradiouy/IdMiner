@@ -1,0 +1,61 @@
+.header-container{
+    padding-left: 2em;
+    padding-right: 1em;
+    position: relative;
+    right: 15px;
+}
+
+.header-subtext{
+    margin: 10px;
+    padding-bottom: 2em;
+    border: solid black 1px;
+    text-align: justify;
+    padding: 0 2em 0 1em;
+    top: 0px;
+    font-family: serif;
+    font-size: 2.0rem;
+    color: #000000
+}
+
+#configuration-header{
+    font-size: 4.6rem;
+    font-family: sans-serif;
+    font-weight: 600;
+    text-align: center;
+    color: darkred;
+}
+
+.configuration-subsection{
+    margin-left: 10px;
+    font-family: inherit;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 36px;
+    padding-top: 19px;
+    font-size: xx-large;
+    color: darkred;
+}
+
+.term-edition-container{
+    margin-top: 50px;
+}
+
+.term-edition-container > div {
+    margin: 0 auto;
+    display: inline-flex;
+}
+
+.term-edition-container label {
+    text-align: center;
+    padding-bottom: 10px;
+    text-decoration: underline;
+    font-size: large;
+}
+
+.term-edition-container > div > div:nth-child(1){
+    margin-right: 15px;
+}
+
+.term-edition-container > div > div:nth-child(2){
+    margin-left: 15px;
+}
