@@ -1,5 +1,8 @@
 
-## IDMiner: *abstract text minnig approach to explore overrepresentated biological terms from gene lists*
+## IDMiner
+
+
+*Abstract text minnig approach to explore overrepresentated biological terms from gene lists*
 
 
 
