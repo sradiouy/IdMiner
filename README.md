@@ -18,7 +18,7 @@ git clone https://github.com/sradiouy/IdMiner
 cd IdMiner
 ```
 
-### 3. Create and activate a virtual environment  
+### 3. Create and activate a python (3.6 or higher) virtual environment  
 
 
 #### 3.1 On Mac or Linux
