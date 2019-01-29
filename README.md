@@ -18,7 +18,9 @@ cd IdMiner
 Create a virtual environment called virtual_env unsing python 3 venv tool.
 
 Now create and activate a virtualenv:   
-On a mac or linux:
+
+
+### On a mac or linux:
 
 ```
 apt-get install python3-venv   --- (only if needed)
@@ -28,7 +30,7 @@ python3 -m venv vidminer
 source vidminer/bin/activate
 ````
 
-On a Windows: 
+### On a Windows: 
  
  If it is your first time with python app, we reccommend the following things: 
   
@@ -40,7 +42,13 @@ Once python and visual sutdio are installed:
 ```
 python3 -m venv vidminer
 
-vidminer/Scripts/activate
+vidminer/Scripts/activate 
+````
+If the previous line has an error please run:
+
+```
+vidminer/Scripts/activate 
+
 ```
 
 Now that virtualenv is setup and active we can install the dependencies and wheels: 
@@ -54,7 +62,10 @@ pip install -r requirements.txt
 
 Once the dependencies have been installed, run the application:
 ```
-python index.py
+python idminer.py
 ```
 
 Then visit http://127.0.0.1:8050/
+
+
+**We hope that IDMiner will be useful for your research!** :v::v::v::v:
