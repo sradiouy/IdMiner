@@ -5,7 +5,6 @@ from dash.dependencies import Input, Output
 
 from app import app
 from src.components import dashboard
-from src.components import term_discovery
 from src.components import configuration
 from src.components import geneboard
 
