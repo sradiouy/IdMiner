@@ -6,7 +6,7 @@
 
 You can clone or download this repo:   
 ```
-git clone https://github.com/agustincastro/datascience-IdMiner/
+git clone https://github.com/sradiouy/IdMiner
 ```
 
 Then cd into the repo:   
@@ -17,18 +17,29 @@ cd datascience-IdMiner
 
 Create a virtual environment called virtual_env unsing python 3 venv tool.
 
-`apt-get install python3-venv`
-
-`python3 -m venv vidminer`
-
 Now create and activate a virtualenv:   
-On a mac or linux:   
-```
-source vidminer/bin/activate
-```
+On a mac or linux:
 
-On a Windows:   
 ```
+apt-get install python3-venv   --- (only if needed)
+
+python3 -m venv vidminer
+
+source vidminer/bin/activate
+````
+
+On a Windows: 
+ 
+ If it is your first time with python app, we reccommend the following things: 
+  
+  1. installation of visual studio code (https://code.visualstudio.com/docs/python/python-tutorial)
+  2. Go to https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2017 and download "Build Tools For Visual Studio" under "Tools for " Visual Studio"
+
+Once python and visual sutdio are installed:
+
+```
+python3 -m venv vidminer
+
 vidminer/Scripts/activate
 ```
 
