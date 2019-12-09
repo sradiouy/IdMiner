@@ -21,14 +21,25 @@ cd IdMiner
 ### 3. Create and activate a python (3.6 or higher) virtual environment  
 
 
-#### 3.1 On Mac or Linux
+#### 3.1 On Linux
 
 ```
-apt-get install python3-venv   --- (only if needed)
+pip3 install virtualenv  --- (only if needed)
 
 python3 -m venv vidminer
 
 source vidminer/bin/activate
+````
+
+#### 3.1 On Mac
+
+```
+pip3 install virtualenv   --- (only if needed)
+
+python3 -m venv vidminer
+
+source vidminer/bin/activate
+
 ````
 
 #### 3.2 On Windows 
