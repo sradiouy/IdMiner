@@ -39,6 +39,8 @@ pip3 install virtualenv   --- (only if needed)
 python3 -m venv vidminer
 
 source vidminer/bin/activate
+
+If you have ntlk certificate problem please go to Macintosh HD > Applications > Python3.x folder (or whatever version of python you're using) > double click on "Install Certificates.command" file, and re-run again
 ````
 
 #### 3.2 On Windows 
