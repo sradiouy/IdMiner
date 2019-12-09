@@ -39,7 +39,6 @@ pip3 install virtualenv   --- (only if needed)
 python3 -m venv vidminer
 
 source vidminer/bin/activate
-
 ````
 
 #### 3.2 On Windows 
