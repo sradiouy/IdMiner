@@ -3,7 +3,7 @@ autopep8==1.4.3
 backoff==1.6.0
 beautifulsoup4==4.6.3
 biopython==1.72
-certifi==2018.10.15
+certifi==2022.12.7
 chardet==3.0.4
 Click==7.0
 dash==0.30.0
